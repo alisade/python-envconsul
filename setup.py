@@ -18,7 +18,7 @@ setup(
     packages=['envconsul',],
     include_package_data=True,
     install_requires=[
-        'consulate==0.2.0',
+        'consulate==0.6.0',
         'tornado==4.1',
     ],
     license="MIT",
