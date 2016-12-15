@@ -1,2 +1,2 @@
-consulate==0.2.0
+consulate==0.6.0
 tornado==4.1
