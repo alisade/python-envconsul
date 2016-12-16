@@ -19,7 +19,7 @@ class EnvConsul(collections.Mapping):
 
         self.consul = False
         try:
-            self.consul = Consul(host, port, token)
+            self.consul = Consul(host, port, token=token)
             self.consul.kv.items()  # Force connection, to test host/port
         except Exception as e:
             raise errors.ConsulConnectionFailed(e)
