@@ -1,7 +1,6 @@
 import collections
 
-from consulate import Consulate
-import requests
+from consulate import Consul
 
 from . import errors
 from . import utils
@@ -15,13 +14,13 @@ from .consts import (
 class EnvConsul(collections.Mapping):
     """Collect Consul key/value data into a dict"""
 
-    def __init__(self, service_name=None, host=DEFAULT_HOST, port=DEFAULT_PORT, *args, **kwargs):
+    def __init__(self, service_name=None, host=DEFAULT_HOST, port=DEFAULT_PORT, token=None, *args, **kwargs):
         self._d = dict(*args, **kwargs)
 
         self.consul = False
         try:
-            self.consul = Consulate(host, port)
-            self.consul.kv.items() # Force connection, to test host/port
+            self.consul = Consul(host, port, token=token)
+            self.consul.kv.items()  # Force connection, to test host/port
         except Exception as e:
             raise errors.ConsulConnectionFailed(e)
 
