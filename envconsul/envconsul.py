@@ -14,12 +14,12 @@ from .consts import (
 class EnvConsul(collections.Mapping):
     """Collect Consul key/value data into a dict"""
 
-    def __init__(self, service_name=None, host=DEFAULT_HOST, port=DEFAULT_PORT, token=None, *args, **kwargs):
+    def __init__(self, service_name=None, host=DEFAULT_HOST, port=DEFAULT_PORT, scheme='http', token=None, *args, **kwargs):
         self._d = dict(*args, **kwargs)
 
         self.consul = False
         try:
-            self.consul = Consul(host, port, token=token)
+            self.consul = Consul(host, port, scheme, token=token)
             self.consul.kv.items()  # Force connection, to test host/port
         except Exception as e:
             raise errors.ConsulConnectionFailed(e)
